@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="assets/favi.ico">
+  <meta name="description" content="LuckyOrbit game library — free social-style games. Virtual coins only. March 2026.">
+  <title>Games — LuckyOrbit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="lo-body">
+  <header class="lo-header">
+    <div class="lo-shell lo-header__row">
+      <a href="index.html" class="lo-logo"><span class="lo-logo__orbit" aria-hidden="true"></span>LuckyOrbit</a>
+      <button type="button" class="lo-nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="lo-nav">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="lo-nav" id="lo-nav">
+        <a href="index.html">Home</a>
+        <a href="games.html" class="is-on">Games</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lo-page">
+    <div class="lo-shell">
+      <p class="lo-eyebrow" style="margin:0 0 0.35rem">Library</p>
+      <h1>Full orbit</h1>
+      <p class="lo-meta">Free social-style games with <strong>virtual coins only</strong>. Filter lanes, hover for motion, then launch. March 2026.</p>
+
+      <div class="lo-filters" role="toolbar" aria-label="Filters">
+        <button type="button" class="lo-filt" data-lo-filter="all" aria-pressed="true">All</button>
+        <button type="button" class="lo-filt" data-lo-filter="slots" aria-pressed="false">Slots</button>
+        <button type="button" class="lo-filt" data-lo-filter="roulette" aria-pressed="false">Roulette</button>
+        <button type="button" class="lo-filt" data-lo-filter="blackjack" aria-pressed="false">Blackjack</button>
+        <button type="button" class="lo-filt" data-lo-filter="poker" aria-pressed="false">Poker</button>
+        <button type="button" class="lo-filt" data-lo-filter="wheel" aria-pressed="false">Wheel</button>
+        <button type="button" class="lo-filt" data-lo-filter="dice" aria-pressed="false">Dice</button>
+      </div>
+
+      <div class="lo-grid-games" id="lo-game-grid">
+        <a href="games/slot-machine/index.html" class="lo-play" data-category="slots">
+          <div class="lo-play__inner">
+            <div class="lo-play__visual">
+              <img src="./assets/game_card_slot.webp" alt="" width="640" height="400" loading="lazy" decoding="async">
+              <div class="lo-play__sheen" aria-hidden="true"></div>
+            </div>
+            <div class="lo-play__panel">
+              <span class="lo-play__badge">Virtual coins</span>
+              <h3 class="lo-play__title">Neon Slots Rush Deluxe</h3>
+              <span class="lo-play__action">Play Free</span>
+            </div>
+          </div>
+        </a>
+        <a href="games/roulette/index.html" class="lo-play" data-category="roulette">
+          <div class="lo-play__inner">
+            <div class="lo-play__visual">
+              <img src="./assets/roulette.webp" alt="" width="640" height="400" loading="lazy" decoding="async">
+              <div class="lo-play__sheen" aria-hidden="true"></div>
+            </div>
+            <div class="lo-play__panel">
+              <span class="lo-play__badge">Free play</span>
+              <h3 class="lo-play__title">Mega Roulette Spin X</h3>
+              <span class="lo-play__action">Play Free</span>
+            </div>
+          </div>
+        </a>
+        <a href="games/lucky-flip-lounge/index.html" class="lo-play" data-category="slots">
+          <div class="lo-play__inner">
+            <div class="lo-play__visual">
+              <img src="./assets/dice.webp" alt="" width="640" height="400" loading="lazy" decoding="async">
+              <div class="lo-play__sheen" aria-hidden="true"></div>
+            </div>
+            <div class="lo-play__panel">
+              <span class="lo-play__badge">Virtual coins</span>
+              <h3 class="lo-play__title">Royal Slots Vault</h3>
+              <span class="lo-play__action">Play Free</span>
+            </div>
+          </div>
+        </a>
+        <a href="games/hi-lo-lounge/index.html" class="lo-play" data-category="wheel">
+          <div class="lo-play__inner">
+            <div class="lo-play__visual">
+              <img src="./assets/playing-card.webp" alt="" width="640" height="400" loading="lazy" decoding="async">
+              <div class="lo-play__sheen" aria-hidden="true"></div>
+            </div>
+            <div class="lo-play__panel">
+              <span class="lo-play__badge">Free play</span>
+              <h3 class="lo-play__title">Golden Wheel Roulette Max</h3>
+              <span class="lo-play__action">Play Free</span>
+            </div>
+          </div>
+        </a>
+        <a href="games/blackjack/index.html" class="lo-play" data-category="blackjack">
+          <div class="lo-play__inner">
+            <div class="lo-play__visual">
+              <img src="./assets/poker.webp" alt="" width="640" height="400" loading="lazy" decoding="async">
+              <div class="lo-play__sheen" aria-hidden="true"></div>
+            </div>
+            <div class="lo-play__panel">
+              <span class="lo-play__badge">Virtual coins</span>
+              <h3 class="lo-play__title">Lucky Blackjack Pro</h3>
+              <span class="lo-play__action">Play Free</span>
+            </div>
+          </div>
+        </a>
+        <a href="games/craps-game/index.html" class="lo-play" data-category="dice">
+          <div class="lo-play__inner">
+            <div class="lo-play__visual">
+              <img src="./assets/baccarat.webp" alt="" width="640" height="400" loading="lazy" decoding="async">
+              <div class="lo-play__sheen" aria-hidden="true"></div>
+            </div>
+            <div class="lo-play__panel">
+              <span class="lo-play__badge">Free play</span>
+              <h3 class="lo-play__title">Prism Wheel Dice Stack</h3>
+              <span class="lo-play__action">Play Free</span>
+            </div>
+          </div>
+        </a>
+        <a href="games/Texas-Holdem/index.html" class="lo-play" data-category="poker">
+          <div class="lo-play__inner">
+            <div class="lo-play__visual">
+              <img src="./assets/game_back.webp" alt="" width="640" height="400" loading="lazy" decoding="async">
+              <div class="lo-play__sheen" aria-hidden="true"></div>
+            </div>
+            <div class="lo-play__panel">
+              <span class="lo-play__badge">Virtual coins</span>
+              <h3 class="lo-play__title">Royal Poker Showdown Wheel</h3>
+              <span class="lo-play__action">Play Free</span>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <p style="text-align:center;margin-top:2rem;font-size:0.86rem;color:var(--lo-soft)">In-game credits are for entertainment only. No purchase required.</p>
+    </div>
+  </main>
+
+  <footer class="lo-footer">
+    <div class="lo-shell">
+      <div class="lo-footer__grid">
+        <div>
+          <div class="lo-footer__brand">LuckyOrbit</div>
+          <p style="margin:0.35rem 0 0;font-size:0.88rem;color:var(--lo-soft)">Virtual coins · Free to play · March 2026</p>
+        </div>
+        <div class="lo-footer__cols">
+          <div>
+            <h4>Site</h4>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="faq.html">FAQ</a>
+          </div>
+          <div>
+            <h4>Legal</h4>
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <a href="terms-of-use.html">Terms &amp; Conditions</a>
+            <a href="responsible-play.html">Responsible Play</a>
+          </div>
+        </div>
+      </div>
+      <p class="lo-footer__note">This site is intended for entertainment purposes only. No purchase is required to use LuckyOrbit. Virtual coins and in-game credits are for fun inside linked games.</p>
+    </div>
+  </footer>
+  <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="assets/favi.ico">
+  <meta name="description" content="Contact LuckyOrbit — March 2026.">
+  <title>Contact — LuckyOrbit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="lo-body">
+  <header class="lo-header">
+    <div class="lo-shell lo-header__row">
+      <a href="index.html" class="lo-logo"><span class="lo-logo__orbit" aria-hidden="true"></span>LuckyOrbit</a>
+      <button type="button" class="lo-nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="lo-nav">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="lo-nav" id="lo-nav">
+        <a href="index.html">Home</a>
+        <a href="games.html">Games</a>
+        <a href="about.html">About</a>
+        <a href="contact.html" class="is-on">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lo-page">
+    <div class="lo-shell">
+      <h1>Contact</h1>
+      <p class="lo-meta">March 2026 · General questions about LuckyOrbit</p>
+
+      <p>Wire the form to your backend when you deploy. For privacy topics, include <strong>Privacy</strong> in the subject.</p>
+
+      <form class="lo-form" action="#" method="post" onsubmit="return false;">
+        <div>
+          <label for="subj">Subject</label>
+          <input type="text" id="subj" name="subject" autocomplete="off" placeholder="How can we help?">
+        </div>
+        <div>
+          <label for="msg">Message</label>
+          <textarea id="msg" name="body" placeholder="Your message"></textarea>
+        </div>
+        <a href="mailto:hello@luckyorbit.com?subject=LuckyOrbit%20inquiry" class="lo-btn lo-btn--prime" style="text-decoration:none;width:fit-content">Email hello@luckyorbit.com</a>
+      </form>
+
+      <p style="margin-top:1.25rem"><a href="index.html">← Home</a></p>
+    </div>
+  </main>
+
+  <footer class="lo-footer">
+    <div class="lo-shell">
+      <p class="lo-footer__note">Entertainment only. Virtual coins · Free to play.</p>
+    </div>
+  </footer>
+  <script src="main.js"></script>
+</body>
+</html>

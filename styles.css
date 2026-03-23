@@ -1,0 +1,1299 @@
+/* =============================================================================
+   LuckyOrbit — free social-style games · virtual coins only · lo- system
+   ============================================================================= */
+
+:root {
+  --lo-deep: #05050c;
+  --lo-panel: #0e0e1a;
+  --lo-elev: #16162a;
+  --lo-text: #f0f2ff;
+  --lo-soft: #9898b8;
+  --lo-line: rgba(255, 255, 255, 0.07);
+  --lo-aqua: #00f5d4;
+  --lo-aqua-dim: rgba(0, 245, 212, 0.12);
+  --lo-amber: #ffb347;
+  --lo-magenta: #ff2d6a;
+  --lo-violet: #7b61ff;
+  --lo-grad: linear-gradient(135deg, #00f5d4 0%, #7b61ff 45%, #ff2d6a 100%);
+  --lo-grad-ring: conic-gradient(from 180deg at 50% 50%, #00f5d4, #7b61ff, #ff2d6a, #00f5d4);
+  --lo-font-display: "Outfit", system-ui, sans-serif;
+  --lo-font-body: "Sora", system-ui, sans-serif;
+  --lo-ease: cubic-bezier(0.33, 1, 0.68, 1);
+  --lo-r: 22px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body.lo-body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--lo-font-body);
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--lo-text);
+  background: var(--lo-deep);
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+}
+
+/* -----------------------------------------------------------------------------
+   Shell
+   ----------------------------------------------------------------------------- */
+
+.lo-shell {
+  width: min(1120px, calc(100% - 1.75rem));
+  margin-inline: auto;
+}
+
+.lo-shell--xl {
+  width: min(1280px, calc(100% - 1.75rem));
+}
+
+/* -----------------------------------------------------------------------------
+   Header
+   ----------------------------------------------------------------------------- */
+
+.lo-header {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: rgba(5, 5, 12, 0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--lo-line);
+}
+
+.lo-header__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 0;
+}
+
+.lo-logo {
+  font-family: var(--lo-font-display);
+  font-weight: 800;
+  font-size: 1.28rem;
+  letter-spacing: -0.03em;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.lo-logo__orbit {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  background: linear-gradient(var(--lo-deep), var(--lo-deep)) padding-box,
+    var(--lo-grad) border-box;
+  position: relative;
+  animation: lo-spin 12s linear infinite;
+}
+
+.lo-logo__orbit::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--lo-aqua);
+  top: -2px;
+  right: 4px;
+  box-shadow: 0 0 12px var(--lo-aqua);
+}
+
+@keyframes lo-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.lo-nav-toggle {
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  border: 1px solid var(--lo-line);
+  background: var(--lo-elev);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  padding: 0;
+}
+
+.lo-nav-toggle span {
+  width: 20px;
+  height: 2px;
+  background: var(--lo-text);
+  border-radius: 2px;
+  transition: transform 0.3s var(--lo-ease), opacity 0.2s;
+}
+
+@media (min-width: 860px) {
+  .lo-nav-toggle {
+    display: none;
+  }
+}
+
+.lo-nav {
+  display: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  flex-direction: column;
+  padding: 0.5rem 1rem 1.25rem;
+  background: rgba(8, 8, 18, 0.98);
+  border-bottom: 1px solid var(--lo-line);
+}
+
+.lo-nav a {
+  padding: 0.85rem 0.75rem;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--lo-soft);
+  border-radius: 12px;
+}
+
+.lo-nav a:hover {
+  color: var(--lo-text);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.lo-nav a.is-on {
+  color: var(--lo-aqua);
+}
+
+@media (min-width: 860px) {
+  .lo-nav {
+    display: flex !important;
+    position: static;
+    flex-direction: row;
+    gap: 0.15rem;
+    padding: 0;
+    background: transparent;
+    border: none;
+  }
+
+  .lo-nav a {
+    padding: 0.45rem 0.95rem;
+  }
+}
+
+.lo-header.lo-open .lo-nav {
+  display: flex;
+}
+
+.lo-header.lo-open .lo-nav-toggle span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.lo-header.lo-open .lo-nav-toggle span:nth-child(2) {
+  opacity: 0;
+}
+
+.lo-header.lo-open .lo-nav-toggle span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* -----------------------------------------------------------------------------
+   Buttons
+   ----------------------------------------------------------------------------- */
+
+.lo-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 1.4rem;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.88rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 0.3s var(--lo-ease), box-shadow 0.3s;
+}
+
+.lo-btn:focus-visible {
+  outline: 2px solid var(--lo-aqua);
+  outline-offset: 3px;
+}
+
+.lo-btn--prime {
+  color: #030308;
+  background: var(--lo-grad);
+  background-size: 200% 200%;
+  animation: lo-grad-move 8s ease infinite;
+  box-shadow: 0 12px 40px rgba(0, 245, 212, 0.2);
+}
+
+.lo-btn--prime:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 50px rgba(123, 97, 255, 0.3);
+}
+
+.lo-btn--line {
+  color: var(--lo-text);
+  background: transparent;
+  border: 1px solid var(--lo-line);
+}
+
+.lo-btn--line:hover {
+  border-color: rgba(0, 245, 212, 0.45);
+  background: var(--lo-aqua-dim);
+}
+
+.lo-btn--wide-sm {
+  width: 100%;
+}
+
+@media (min-width: 480px) {
+  .lo-btn--wide-sm {
+    width: auto;
+  }
+}
+
+@keyframes lo-grad-move {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   Hero — layered rings + split copy / visual
+   ----------------------------------------------------------------------------- */
+
+.lo-hero {
+  position: relative;
+  padding: clamp(1.25rem, 4vw, 2rem) 0 clamp(3rem, 8vw, 5rem);
+  overflow: hidden;
+}
+
+.lo-hero__aurora {
+  position: absolute;
+  inset: -30% -20% auto -20%;
+  height: 85%;
+  background: radial-gradient(ellipse 55% 45% at 30% 20%, rgba(0, 245, 212, 0.14), transparent 55%),
+    radial-gradient(ellipse 45% 40% at 75% 35%, rgba(123, 97, 255, 0.18), transparent 50%),
+    radial-gradient(ellipse 35% 30% at 55% 80%, rgba(255, 45, 106, 0.08), transparent 45%);
+  animation: lo-aurora 20s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes lo-aurora {
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+  to {
+    transform: translate(2%, -2%) scale(1.05);
+  }
+}
+
+.lo-hero__noise {
+  position: absolute;
+  inset: 0;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+.lo-hero__layout {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+@media (min-width: 960px) {
+  .lo-hero__layout {
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 2rem;
+    min-height: min(70vh, 560px);
+  }
+}
+
+.lo-hero__copy {
+  animation: lo-enter 0.85s var(--lo-ease) both;
+}
+
+@keyframes lo-enter {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.lo-hero__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.85rem;
+  margin-bottom: 1rem;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--lo-aqua);
+  border: 1px solid rgba(0, 245, 212, 0.35);
+  border-radius: 999px;
+  background: rgba(0, 245, 212, 0.06);
+}
+
+.lo-hero__tag::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--lo-magenta);
+  box-shadow: 0 0 10px var(--lo-magenta);
+  animation: lo-pulse 2s ease-in-out infinite;
+}
+
+@keyframes lo-pulse {
+  50% {
+    opacity: 0.5;
+    transform: scale(0.85);
+  }
+}
+
+.lo-hero h1 {
+  margin: 0 0 1rem;
+  font-family: var(--lo-font-display);
+  font-size: clamp(2.4rem, 7vw, 4rem);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+}
+
+.lo-hero h1 .lo-hero__lucky {
+  display: block;
+}
+
+.lo-hero h1 .lo-hero__orbit-text {
+  display: block;
+  font-size: 0.42em;
+  font-weight: 700;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  margin-top: 0.35rem;
+  background: var(--lo-grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.lo-hero__lead {
+  margin: 0 0 1.5rem;
+  max-width: 26rem;
+  font-size: clamp(0.95rem, 2vw, 1.05rem);
+  color: var(--lo-soft);
+}
+
+.lo-hero__cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  align-items: center;
+}
+
+.lo-hero__fine {
+  margin: 1.25rem 0 0;
+  font-size: 0.82rem;
+  color: var(--lo-soft);
+  max-width: 24rem;
+}
+
+/* Visual stage */
+.lo-hero__stage {
+  position: relative;
+  min-height: 300px;
+  animation: lo-enter 1s var(--lo-ease) 0.1s both;
+}
+
+@media (min-width: 960px) {
+  .lo-hero__stage {
+    min-height: 380px;
+  }
+}
+
+.lo-hero__rings {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  transform: translate(-50%, -50%);
+  width: min(100%, 420px);
+  aspect-ratio: 1;
+  pointer-events: none;
+}
+
+.lo-hero__rings span {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.lo-hero__rings span:nth-child(1) {
+  inset: 0;
+  animation: lo-spin-ring 20s linear infinite;
+}
+
+.lo-hero__rings span:nth-child(2) {
+  inset: 14%;
+  border-color: rgba(0, 245, 212, 0.12);
+  animation: lo-spin-ring-rev 26s linear infinite;
+}
+
+.lo-hero__rings span:nth-child(3) {
+  inset: 28%;
+  border-color: rgba(123, 97, 255, 0.22);
+  animation: lo-spin-ring 14s linear infinite;
+}
+
+@keyframes lo-spin-ring {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes lo-spin-ring-rev {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+.lo-hero__moon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(72%, 280px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 0 1px rgba(0, 245, 212, 0.15), 0 24px 80px rgba(0, 0, 0, 0.6);
+  z-index: 2;
+}
+
+.lo-hero__moon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.lo-hero__float {
+  position: absolute;
+  z-index: 3;
+  padding: 0.5rem 0.85rem;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 12px;
+  background: rgba(14, 14, 26, 0.92);
+  border: 1px solid var(--lo-line);
+  backdrop-filter: blur(12px);
+  animation: lo-float 4.5s ease-in-out infinite;
+}
+
+.lo-hero__float--a {
+  top: 8%;
+  left: 0;
+  animation-delay: 0s;
+}
+
+.lo-hero__float--b {
+  bottom: 18%;
+  right: 0;
+  animation-delay: 0.8s;
+}
+
+.lo-hero__float--c {
+  top: 38%;
+  right: -4%;
+  animation-delay: 1.6s;
+}
+
+@keyframes lo-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   Marquee strip
+   ----------------------------------------------------------------------------- */
+
+.lo-marquee-wrap {
+  border-block: 1px solid var(--lo-line);
+  background: linear-gradient(90deg, transparent, rgba(123, 97, 255, 0.06), transparent);
+  overflow: hidden;
+  max-width: 100vw;
+}
+
+.lo-marquee {
+  display: flex;
+  width: max-content;
+  animation: lo-marquee 32s linear infinite;
+}
+
+.lo-marquee:hover {
+  animation-play-state: paused;
+}
+
+@keyframes lo-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.lo-marquee__inner {
+  display: flex;
+  gap: 3rem;
+  padding: 0.85rem 1.5rem;
+  align-items: center;
+}
+
+.lo-marquee span {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--lo-soft);
+  white-space: nowrap;
+}
+
+.lo-marquee span strong {
+  color: var(--lo-aqua);
+  font-weight: 800;
+}
+
+/* -----------------------------------------------------------------------------
+   Section titles
+   ----------------------------------------------------------------------------- */
+
+.lo-section {
+  padding: clamp(2.5rem, 7vw, 4.5rem) 0;
+}
+
+.lo-section__head {
+  margin-bottom: 2rem;
+  max-width: 36rem;
+}
+
+.lo-eyebrow {
+  margin: 0 0 0.4rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--lo-magenta);
+}
+
+.lo-section h2 {
+  margin: 0;
+  font-family: var(--lo-font-display);
+  font-size: clamp(1.65rem, 3.5vw, 2.35rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.lo-section__lead {
+  margin: 0.6rem 0 0;
+  color: var(--lo-soft);
+  font-size: 0.95rem;
+}
+
+/* -----------------------------------------------------------------------------
+   Stagger grid — featured games (NOT uniform grid)
+   ----------------------------------------------------------------------------- */
+
+.lo-stagger {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+@media (min-width: 720px) {
+  .lo-stagger {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem 1rem;
+    align-items: start;
+  }
+
+  .lo-stagger > *:nth-child(even) {
+    margin-top: 2.5rem;
+  }
+}
+
+@media (min-width: 1100px) {
+  .lo-stagger {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .lo-stagger > *:nth-child(even) {
+    margin-top: 0;
+  }
+
+  .lo-stagger > *:nth-child(3n + 2) {
+    margin-top: 3rem;
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   GAME CARD — diagonal split · skew panel · animated ring border
+   NOT standard rectangle + text below
+   ----------------------------------------------------------------------------- */
+
+.lo-play {
+  position: relative;
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  border-radius: var(--lo-r);
+  isolation: isolate;
+  animation: lo-enter 0.7s var(--lo-ease) both;
+}
+
+.lo-play:nth-child(1) {
+  animation-delay: 0.05s;
+}
+
+.lo-play:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.lo-play:nth-child(3) {
+  animation-delay: 0.15s;
+}
+
+.lo-play:nth-child(4) {
+  animation-delay: 0.2s;
+}
+
+.lo-play:nth-child(5) {
+  animation-delay: 0.25s;
+}
+
+.lo-play:nth-child(6) {
+  animation-delay: 0.3s;
+}
+
+.lo-play::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: calc(var(--lo-r) + 1px);
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(0, 245, 212, 0.15), rgba(123, 97, 255, 0.15), rgba(255, 45, 106, 0.15));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.5;
+  transition: opacity 0.4s, transform 0.5s var(--lo-ease);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.lo-play:hover::before,
+.lo-play:focus-visible::before {
+  opacity: 1;
+  transform: scale(1.01);
+}
+
+.lo-play__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr;
+  min-height: 200px;
+  background: var(--lo-panel);
+  border-radius: var(--lo-r);
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  transition: transform 0.45s var(--lo-ease), box-shadow 0.45s;
+}
+
+@media (min-width: 520px) {
+  .lo-play__inner {
+    grid-template-columns: 48% 52%;
+    min-height: 168px;
+  }
+}
+
+.lo-play:hover .lo-play__inner,
+.lo-play:focus-visible .lo-play__inner {
+  transform: translateY(-10px) scale(1.01);
+  box-shadow: 0 36px 80px rgba(0, 0, 0, 0.55), 0 0 40px rgba(0, 245, 212, 0.08);
+}
+
+.lo-play__visual {
+  position: relative;
+  min-height: 160px;
+  overflow: hidden;
+  clip-path: polygon(0 0, 100% 0, 100% 92%, 0 100%);
+}
+
+@media (min-width: 520px) {
+  .lo-play__visual {
+    min-height: auto;
+    clip-path: polygon(0 0, 100% 0, 82% 100%, 0 100%);
+    min-height: 100%;
+  }
+}
+
+.lo-play__visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.08);
+  transition: transform 0.65s var(--lo-ease);
+}
+
+.lo-play:hover .lo-play__visual img,
+.lo-play:focus-visible .lo-play__visual img {
+  transform: scale(1.15);
+}
+
+.lo-play__sheen {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(125deg, transparent 42%, rgba(255, 255, 255, 0.07) 50%, transparent 58%);
+  transform: translateX(-60%);
+  transition: transform 0.7s var(--lo-ease);
+  pointer-events: none;
+}
+
+.lo-play:hover .lo-play__sheen {
+  transform: translateX(60%);
+}
+
+.lo-play__panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1.1rem 1rem 1.15rem 0.5rem;
+  gap: 0.45rem;
+  background: linear-gradient(165deg, var(--lo-elev) 0%, var(--lo-panel) 100%);
+}
+
+@media (min-width: 520px) {
+  .lo-play__panel {
+    margin-left: -12%;
+    padding: 1.1rem 1.1rem 1.1rem 1.25rem;
+    z-index: 2;
+    clip-path: polygon(12% 0, 100% 0, 100% 100%, 0 100%);
+  }
+}
+
+.lo-play__badge {
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--lo-aqua);
+}
+
+.lo-play__title {
+  margin: 0;
+  font-family: var(--lo-font-display);
+  font-size: clamp(1rem, 2.2vw, 1.2rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.lo-play__action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
+  margin-top: 0.25rem;
+  min-height: 40px;
+  padding: 0 1.1rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #030308;
+  background: var(--lo-grad);
+  border-radius: 999px;
+  transform: translateX(0);
+  transition: transform 0.35s var(--lo-ease), box-shadow 0.35s;
+  box-shadow: 0 8px 24px rgba(0, 245, 212, 0.2);
+}
+
+.lo-play:hover .lo-play__action,
+.lo-play:focus-visible .lo-play__action {
+  transform: translateX(6px);
+  box-shadow: 0 12px 32px rgba(123, 97, 255, 0.35);
+}
+
+.lo-play:focus-visible {
+  outline: none;
+}
+
+.lo-play:focus-visible::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: calc(var(--lo-r) + 4px);
+  border: 2px solid var(--lo-aqua);
+  z-index: 4;
+  pointer-events: none;
+}
+
+/* Games page — full width cards */
+.lo-grid-games {
+  display: grid;
+  gap: 1.15rem;
+}
+
+@media (min-width: 640px) {
+  .lo-grid-games {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .lo-grid-games {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.lo-grid-games .lo-play__inner {
+  min-height: 176px;
+}
+
+/* -----------------------------------------------------------------------------
+   Category chips — curved row
+   ----------------------------------------------------------------------------- */
+
+.lo-lanes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: flex-start;
+  margin-top: 1.5rem;
+}
+
+.lo-lane {
+  padding: 0.55rem 1rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--lo-soft);
+  border-radius: 999px;
+  border: 1px solid var(--lo-line);
+  background: rgba(255, 255, 255, 0.02);
+  transition: border-color 0.3s, color 0.3s, transform 0.3s var(--lo-ease);
+}
+
+.lo-lane:hover {
+  color: var(--lo-text);
+  border-color: rgba(0, 245, 212, 0.4);
+  transform: translateY(-2px);
+}
+
+/* -----------------------------------------------------------------------------
+   Info band — overlapping cards
+   ----------------------------------------------------------------------------- */
+
+.lo-band {
+  position: relative;
+  padding: clamp(2.5rem, 6vw, 4rem) 0;
+}
+
+.lo-band__bg {
+  position: absolute;
+  inset: 10% -5% auto -5%;
+  height: 70%;
+  background: radial-gradient(ellipse at 50% 0%, rgba(123, 97, 255, 0.12), transparent 60%);
+  pointer-events: none;
+}
+
+.lo-pillars {
+  display: grid;
+  gap: 1rem;
+  position: relative;
+  z-index: 2;
+}
+
+@media (min-width: 768px) {
+  .lo-pillars {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.lo-pillar {
+  padding: 1.35rem 1.2rem;
+  border-radius: 18px;
+  border: 1px solid var(--lo-line);
+  background: rgba(22, 22, 42, 0.6);
+  backdrop-filter: blur(10px);
+  transform: rotate(0deg);
+  transition: transform 0.4s var(--lo-ease), border-color 0.3s;
+}
+
+.lo-pillar:nth-child(2) {
+  margin-top: 0;
+}
+
+@media (min-width: 768px) {
+  .lo-pillar:nth-child(2) {
+    margin-top: -1.5rem;
+    transform: rotate(-1deg);
+  }
+
+  .lo-pillar:nth-child(1) {
+    transform: rotate(1deg);
+  }
+
+  .lo-pillar:nth-child(3) {
+    transform: rotate(1.5deg);
+  }
+}
+
+.lo-pillar:hover {
+  border-color: rgba(0, 245, 212, 0.25);
+  transform: rotate(0deg) translateY(-6px) !important;
+}
+
+.lo-pillar h3 {
+  margin: 0 0 0.4rem;
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.lo-pillar p {
+  margin: 0;
+  font-size: 0.86rem;
+  color: var(--lo-soft);
+}
+
+/* -----------------------------------------------------------------------------
+   Steps — horizontal timeline
+   ----------------------------------------------------------------------------- */
+
+.lo-track {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+
+@media (min-width: 900px) {
+  .lo-track {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    position: relative;
+  }
+
+  .lo-track::before {
+    content: "";
+    position: absolute;
+    top: 1.25rem;
+    left: 8%;
+    right: 8%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--lo-aqua), var(--lo-violet), var(--lo-magenta));
+    opacity: 0.35;
+    border-radius: 2px;
+  }
+}
+
+.lo-node {
+  position: relative;
+  padding: 1.5rem 1rem 1rem;
+  text-align: center;
+}
+
+.lo-node__dot {
+  width: 14px;
+  height: 14px;
+  margin: 0 auto 0.75rem;
+  border-radius: 50%;
+  background: var(--lo-grad);
+  box-shadow: 0 0 20px rgba(0, 245, 212, 0.45);
+}
+
+.lo-node h3 {
+  margin: 0 0 0.35rem;
+  font-size: 0.95rem;
+  font-weight: 800;
+}
+
+.lo-node p {
+  margin: 0;
+  font-size: 0.84rem;
+  color: var(--lo-soft);
+}
+
+/* -----------------------------------------------------------------------------
+   Trust
+   ----------------------------------------------------------------------------- */
+
+.lo-trust {
+  padding: 2rem 0 3rem;
+}
+
+.lo-trust__box {
+  padding: 1.5rem 1.25rem;
+  border-radius: var(--lo-r);
+  border: 1px solid rgba(0, 245, 212, 0.2);
+  background: linear-gradient(145deg, rgba(0, 245, 212, 0.05), rgba(123, 97, 255, 0.04));
+}
+
+.lo-trust__box h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.lo-trust__box ul {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: var(--lo-soft);
+  font-size: 0.88rem;
+}
+
+.lo-trust__box li {
+  margin-bottom: 0.35rem;
+}
+
+/* -----------------------------------------------------------------------------
+   Footer
+   ----------------------------------------------------------------------------- */
+
+.lo-footer {
+  padding: 2.5rem 0 2rem;
+  border-top: 1px solid var(--lo-line);
+  background: #030308;
+}
+
+.lo-footer__grid {
+  display: grid;
+  gap: 2rem;
+}
+
+@media (min-width: 700px) {
+  .lo-footer__grid {
+    grid-template-columns: 1.2fr 1fr;
+  }
+}
+
+.lo-footer__brand {
+  font-family: var(--lo-font-display);
+  font-weight: 800;
+  font-size: 1.2rem;
+}
+
+.lo-footer__cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.lo-footer h4 {
+  margin: 0 0 0.5rem;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--lo-soft);
+}
+
+.lo-footer a {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.88rem;
+  color: var(--lo-soft);
+  text-decoration: none;
+}
+
+.lo-footer a:hover {
+  color: var(--lo-aqua);
+}
+
+.lo-footer__note {
+  margin: 2rem 0 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--lo-line);
+  font-size: 0.76rem;
+  color: var(--lo-soft);
+  line-height: 1.55;
+}
+
+/* -----------------------------------------------------------------------------
+   Inner pages
+   ----------------------------------------------------------------------------- */
+
+.lo-page {
+  padding: clamp(2.5rem, 6vw, 4rem) 0 clamp(3rem, 8vw, 5rem);
+}
+
+.lo-page h1 {
+  font-family: var(--lo-font-display);
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  margin: 0 0 0.35rem;
+}
+
+.lo-meta {
+  font-size: 0.85rem;
+  color: var(--lo-soft);
+  margin: 0 0 1.5rem;
+}
+
+.lo-page h2 {
+  font-size: 1.1rem;
+  margin: 1.5rem 0 0.5rem;
+}
+
+.lo-page p,
+.lo-page li {
+  color: var(--lo-soft);
+  font-size: 0.94rem;
+}
+
+.lo-page ul {
+  padding-left: 1.2rem;
+}
+
+.lo-form {
+  display: grid;
+  gap: 1rem;
+  max-width: 460px;
+}
+
+.lo-form label {
+  display: block;
+  font-weight: 700;
+  font-size: 0.82rem;
+  margin-bottom: 0.3rem;
+}
+
+.lo-form input,
+.lo-form textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  border: 1px solid var(--lo-line);
+  background: var(--lo-elev);
+  color: var(--lo-text);
+  font: inherit;
+}
+
+.lo-form textarea {
+  min-height: 130px;
+  resize: vertical;
+}
+
+.lo-faq details {
+  border: 1px solid var(--lo-line);
+  border-radius: 14px;
+  margin-bottom: 0.45rem;
+  background: var(--lo-panel);
+}
+
+.lo-faq summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 0.95rem 1rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.lo-faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.lo-faq details[open] {
+  border-color: rgba(0, 245, 212, 0.25);
+}
+
+.lo-faq__body {
+  padding: 0 1rem 1rem;
+  font-size: 0.88rem;
+  color: var(--lo-soft);
+  line-height: 1.55;
+}
+
+/* Filters */
+.lo-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 1.25rem 0 1.75rem;
+}
+
+.lo-filt {
+  min-height: 38px;
+  padding: 0 0.9rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  border: 1px solid var(--lo-line);
+  background: var(--lo-elev);
+  color: var(--lo-soft);
+  cursor: pointer;
+  transition: border-color 0.25s, background 0.25s, color 0.25s;
+}
+
+.lo-filt[aria-pressed="true"] {
+  border-color: rgba(0, 245, 212, 0.45);
+  background: rgba(0, 245, 212, 0.1);
+  color: var(--lo-text);
+}
